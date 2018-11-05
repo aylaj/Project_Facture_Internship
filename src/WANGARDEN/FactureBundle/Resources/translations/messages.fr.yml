@@ -1,0 +1,23 @@
+facture:
+  global:
+    app_name: Gestion facture
+    societe: Wangarden
+    nom_site: Platforme de Facturation
+    menu: Menu
+    accueil: Accueil
+    nom_site:  Platforme de Facturation
+    client: Client
+    liste_des_clients: Liste des Clients
+    ajouter_un_client: Ajouter un Client
+    produit: Produit
+    liste_des_produits: Liste des Produits
+    ajouter_un_produit: Ajouter un Produit
+    produit_client: Gestion de produits clients
+    table_client: Liste des Clients
+    table_produit: Liste des produits
+    index_facture: Mes Factures
+
+
+
+  entity:
+    client: Nom Prenom

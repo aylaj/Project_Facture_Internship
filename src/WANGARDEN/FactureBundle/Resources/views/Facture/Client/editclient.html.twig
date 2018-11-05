@@ -1,0 +1,19 @@
+{% extends "WANGARDENFactureBundle::layout.html.twig" %}
+
+{% block title %}
+Wangarden   - {{ parent() }}
+{% endblock %}
+
+{% block plateforme_body %}
+<h2>Editer un client</h2>
+
+{{ include("WANGARDENFactureBundle:Facture/Client:form.html.twig") }}
+
+ <p>
+     <a href="{{ path('wangarden_facture_client_index') }}" class="btn btn-default">
+       <i class="glyphicon glyphicon-chevron-left"></i>
+       Retour à la liste client
+     </a>
+ </p>
+
+{% endblock %}

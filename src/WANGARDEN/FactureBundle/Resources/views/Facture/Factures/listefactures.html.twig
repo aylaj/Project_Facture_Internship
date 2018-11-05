@@ -1,0 +1,55 @@
+{% extends "WANGARDENFactureBundle::layout.html.twig" %}
+{% block stylesheets %}
+  {{ parent() }}
+{% endblock %}
+
+{% block title %}
+  Wangarden -
+  {{ parent() }}
+{% endblock %}
+
+{% block plateforme_body %}
+
+
+
+
+  {{ form_start(formListeFacture)}}
+  {{ form_widget(formListeFacture)}}
+  <input type="submit" value="rechercher" class="btn btn-primary"/>
+  {{ form_end(formListeFacture)}}
+
+  <table class="table">
+    <h2>{{'facture.global.table_client'|trans }}</h2>
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Numero de Facture</th>
+        <th scope="col">Nom Clients</th>
+
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for ft in facture %}
+        <tr>
+
+          <td>
+            {{ft.id}}
+
+          </td>
+
+          <td>
+
+              {{ ft.client.nom }}
+          </td>
+
+          <td>
+            <a class="" href="{{ path('wangarden_facture_client_view', {'id': ft.id}) }}" role="button">Edit</a>
+
+          </td>
+        </tr>
+
+      </tbody>
+    {% endfor %}
+  </table>
+
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends "WANGARDENFactureBundle::layout.html.twig" %}
+{% block stylesheets %}
+  {{ parent() }}
+{% endblock %}
+
+{% block title %}
+  Wangarden -
+  {{ parent() }}
+{% endblock %}
+
+{% block plateforme_body %}
+
+  <div class="well research_form">
+
+    <h3>Formulaire de recherche de client</h3>
+
+    <form method="post" action="{{path('wangarden_facture_client_index')}}">
+
+      {{ form_widget(form) }}
+
+      <input type="submit" value="rechercher" class="btn btn-primary"/>
+
+    </form>
+
+  </div>
+
+  <table class="table">
+    <h2>{{'facture.global.table_client'|trans }}</h2>
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Prenom</th>
+        <th scope="col">Nom</th>
+        <th scope="col">Mail</th>
+        <th scope="col">Adresse</th>
+        <th scope="col">Tel</th>
+        <th scope="col">Societe</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for cl in client %}
+        <tr>
+          <td>
+            {{cl.prenom}}
+          </td>
+          <td>
+            {{cl.nom}}
+          </td>
+          <td>
+            {{cl.mail}}
+          </td>
+          <td>
+            {{cl.adresse}}
+          </td>
+          <td>
+            {{cl.tel}}
+          </td>
+          <td>
+            {{cl.societe}}
+          </td>
+          <td>
+            <a class="" href="{{ path('wangarden_facture_client_edit', {'id': cl.id}) }}" role="button">Edit</a>
+            <a class="" href="{{ path('wangarden_facture_client_supprimer', {'id': cl.id}) }}" role="button">Supp</a>
+          </td>
+        </tr>
+
+      </tbody>
+    {% endfor %}
+  </table>
+{% endblock %}

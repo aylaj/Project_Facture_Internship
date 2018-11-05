@@ -1,0 +1,246 @@
+{% extends "WANGARDENFactureBundle::layout.html.twig" %}
+{% block stylesheets %}
+  {{ parent() }}
+{% endblock %}
+
+{% block title %}
+  Wangarden -
+  {{ parent() }}
+{% endblock %}
+
+{% block plateforme_body %}
+
+  <div class="well research_form">
+
+      <button type="button" class="btn btn-primary btn-lg-8 col-md-3" data-toggle="modal" data-target="#myModal">
+        Ajouter un client
+      </button>
+      <!-- Modal -->
+      <div class="modal fade" id="myModal" tabindex="-1" role="dbialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="myModalLabel">Formulaire d'Ajout</h4>
+            </div>
+            <div class="modal-body">
+
+              <div class="well">
+                {{ form_start(formClient, {'attr': {'id': 'form-add-client', 'class': 'form-horizontal'}}) }}
+                {{ form_errors(formClient) }}
+                {# Génération manuelle et éclatée : #}
+                <div class="form-group">
+                  {{ form_label(formClient.nom, "Nom ") }}
+                  {{ form_errors(formClient.nom) }}
+                  <div class="col-sm-10">
+                    {{ form_widget(formClient.nom, {'attr': {'class': 'nomclass'}}) }}
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  {{ form_label(formClient.prenom, "Prenom ") }}
+                  {{ form_errors(formClient.prenom) }}
+                  <div class="col-sm-10">
+                    {{ form_widget(formClient.prenom, {'attr': {'class': 'prenomclass'}}) }}
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  {{ form_label(formClient.adresse, "Adresse ") }}
+                  {{ form_errors(formClient.adresse) }}
+                  <div class="col-sm-10">
+                    {{ form_widget(formClient.adresse, {'attr': {'class': 'adresseclass'}}) }}
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  {{ form_label(formClient.mail, "Mail ") }}
+                  {{ form_errors(formClient.mail) }}
+                  <div class="col-sm-10">
+                    {{ form_widget(formClient.mail, {'attr': {'class': 'mailclass'}}) }}
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  {{ form_label(formClient.tel, "N° Telephone ") }}
+                  {{ form_errors(formClient.tel) }}
+                  <div class="col-sm-10">
+                    {{ form_widget(formClient.tel, {'attr': {'class': 'telclass'}}) }}
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  {{ form_label(formClient.societe, "") }}
+                  {{ form_errors(formClient.societe) }}
+                  <div class="col-sm-10">
+                    {{ form_widget(formClient.societe, {'attr': {'class': 'sociteclass'}}) }}
+                  </div>
+                </div>
+
+                {{ form_rest(formClient) }}
+                {{ form_end(formClient )}}
+
+              </div>
+
+              <button id="btn-add-client" class='btn btn-primary'>
+                Ajouter
+              </button>
+            </div>
+            <div class="modal-footer">
+              <button id="btn-close-modal" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <form method="POST">
+      <div class="form-row">
+        <div class="form-group col-md-12">
+          <div class="col-md">
+            <div type="text" class="form-control">
+              {{ form_errors(formFacture.Client) }}
+              {{ form_row(formFacture.Client) }}
+              {{ form_errors(formFacture.facturesptoduits) }}
+              {{ form_row(formFacture.facturesptoduits) }}
+              {{ form_rest(formFacture)}}
+              <a href="#" id="add_produit" class="btn btn-primary col-lg-3">Ajouter un produit</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class='btn btn-success col-lg-3'>
+        Générer Facture
+      </button>
+
+    </form>
+  </div>
+
+{% endblock %}
+
+{% block javascripts %}
+
+  {{ parent() }}
+
+  <script type="text/javascript">
+
+$('#nomclass').keyup(function(){
+  var nom=$('#nomclass').val();
+
+})
+
+$('#prenomclass').keyup(function(){
+  var nom=$('#prenomclass').val();
+
+})
+$('#adresseclass').keyup(function(){
+  var nom=$('#adresseclass').val();
+
+})
+$('#mailclass').keyup(function(){
+  var nom=$('#mailclass').val();
+
+})
+$('#telclass').keyup(function(){
+  var nom=$('#telclass').val();
+
+})
+
+$('#societeclass').keyup(function(){
+  var nom=$('#societeclass').val();
+
+})
+
+      $(document).ready(function() {
+
+        //Ajout ClientType
+        $('#btn-add-client').click(function(){
+          $.ajax({
+            type: 'POST',
+            url: "{{ path('wangarden_facture_client_produitclient') }}",
+            data: $("#form-add-client").serialize(),
+            success: function(reponse) {
+              $('#wangarden_facturebundle_facture_Client').replaceWith(
+                $(reponse).find('#wangarden_facturebundle_facture_Client')
+              );
+              $('#btn-close-modal').click();
+            },
+
+          });
+        });
+        //Fin ajout client
+
+
+
+        $("#wangarden_facturebundle_facture_Client").change(function() {
+          console.log("Changed");
+        });
+
+        $('#wangarden_facturebundle_facture_facturesptoduits_0_quantite').click(function() {
+          console.log('amine');
+
+        });
+
+        var $montant = $('select#wangarden_facturebundle_facture_facturesptoduits_0_produit');
+        var $quantite = $('input#wangarden_facturebundle_facture_facturesptoduits_0_quantite');
+
+        function calcul($montant, $quantite) {
+          var cal = $montant.attr('prix') * $quantite.attr('wangarden_facturebundle_facture[facturesproduits][0][quantite]');
+          $("#form_montant").val(cal);
+        }
+
+        // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
+        var $container = $('div#wangarden_facturebundle_facture_facturesptoduits');
+        // On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement
+        var index = $container.find(':input').length;
+        // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
+        $('#add_produit').click(function(e) {
+          addProduit($container);
+          e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+          return false;
+        });
+        // On ajoute un premier champ automatiquement s'il n'en existe pas déjà un (cas d'une nouvelle annonce par exemple).
+        if (index == 0) {
+          addProduit($container);
+        } else {
+          // S'il existe déjà des produits, on ajoute un lien de suppression pour chacune d'entre elles
+          $container.children('div').each(function() {
+            addDeleteLink($(this));
+          });
+        }
+
+        // La fonction qui ajoute un formulaire produit-client
+        function addProduit($container) {
+          // Dans le contenu de l'attribut « data-prototype », on remplace :
+          // - le texte "__name__label__" qu'il contient par le label du champ
+          // - le texte "__name__" qu'il contient par le numéro du champ
+          var template = $container.attr('data-prototype').replace(/__name__label__/g, 'Produit ' + (
+            index + 1
+          )).replace(/__name__/g, index);
+          // On crée un objet jquery qui contient ce template
+          var $prototype = $(template);
+          // On ajoute au prototype un lien pour pouvoir supprimer la catégorie
+          addDeleteLink($prototype);
+          // On ajoute le prototype modifié à la fin de la balise <div>
+          $container.append($prototype);
+          // Enfin, on incrémente le compteur pour que le prochain ajout se fasse avec un autre numéro
+          index++;
+        }
+
+        // La fonction qui ajoute un lien de suppression d'une catégorie
+        function addDeleteLink($prototype) {
+          // Création du lien
+          var $deleteLink = $('<a href="#" class="btn btn-danger col-lg-3">Supprimer</a>');
+          // Ajout du lien
+          $prototype.append($deleteLink);
+          // Ajout du listener sur le clic du lien pour effectivement supprimer la catégorie
+          $deleteLink.click(function(e) {
+            $prototype.remove();
+            e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+            return false;
+          });
+        }
+
+      });
+  </script>
+
+{% endblock %}

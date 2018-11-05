@@ -1,0 +1,37 @@
+
+wangarden_facture_client_index:
+    path:     /index
+    defaults:
+      _controller: WANGARDENFactureBundle:Client:index
+
+wangarden_facture_client_create:
+    path:     /create
+    defaults:
+      _controller: WANGARDENFactureBundle:Client:create
+
+wangarden_facture_client_edit:
+    path:     /edit/{id}
+    defaults:
+      _controller: WANGARDENFactureBundle:Client:edit
+
+
+wangarden_facture_client_supprimer:
+    path:     /delete/{id}
+    defaults:
+      _controller: WANGARDENFactureBundle:Client:delete
+
+wangarden_facture_client_produitclient:
+    path:     /produit_client
+    defaults:
+      _controller: WANGARDENFactureBundle:Facture:SelectProduitClient
+
+wangarden_facture_client_etablirfacture:
+    path:     /facture
+    defaults:
+      _controller: WANGARDENFactureBundle:Produitclient:etablirfacture
+
+
+wangarden_facture_client_view:
+    path:     /facture/{id}
+    defaults:
+      _controller: WANGARDENFactureBundle:Facture:view

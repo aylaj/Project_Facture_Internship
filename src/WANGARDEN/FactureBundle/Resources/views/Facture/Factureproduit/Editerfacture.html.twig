@@ -1,0 +1,21 @@
+
+    {% extends "WANGARDENFactureBundle::layout.html.twig" %}
+
+{% block title %}
+Wangarden   - {{ parent() }}
+{% endblock %}
+
+{% block stylesheets %}
+  {{ parent() }}
+{% endblock %}
+
+
+{% block plateforme_body %}
+
+
+{{ form_start(form)}}
+{{ form_widget(form)}}
+<button type="submit"> Ajouter produit</button>
+{{ form_end(form)}}
+
+{% endblock %}

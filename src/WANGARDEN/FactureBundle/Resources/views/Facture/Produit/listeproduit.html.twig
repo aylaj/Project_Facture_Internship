@@ -1,0 +1,47 @@
+{% extends "WANGARDENFactureBundle::layout.html.twig" %}
+{% block stylesheets %}
+  {{ parent() }}
+{% endblock %}
+
+{% block title %}
+  Wangarden -
+  {{ parent() }}
+{% endblock %}
+
+{% block plateforme_body %}
+  <table class="table">
+    <h2>{{'facture.global.table_produit'|trans }}</h2>
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Libelle</th>
+        <th scope="col">Description</th>
+        <th scope="col">Origine</th>
+        <th scope="col">Prix</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for pr in produit %}
+        <tr>
+          <td>
+            {{pr.libelle}}
+          </td>
+          <td>
+            {{pr.description}}
+          </td>
+          <td>
+            {{pr.origine}}
+          </td>
+          <td>
+            {{pr.prix}}
+          </td>
+          <td>
+            <a class="" href="{{ path('wangarden_facture_produit_edit', {'id': pr.id}) }}" role="button">Edit</a>
+            <a class="" href="{{ path('wangarden_facture_produit_supprimer', {'id': pr.id}) }}" role="button">Supp</a>
+          </td>
+        </tr>
+
+      </tbody>
+    {% endfor %}
+  </table>
+{% endblock %}

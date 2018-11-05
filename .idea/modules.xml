@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../F/.idea/F.iml" filepath="$PROJECT_DIR$/../F/.idea/F.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Facture.iml" filepath="$PROJECT_DIR$/.idea/Facture.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../unmfr-intranetv3/.idea/unmfr-intranetv3.iml" filepath="$PROJECT_DIR$/../unmfr-intranetv3/.idea/unmfr-intranetv3.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,5 @@
+
+wangarden_facture_mesFactures:
+    path:     /index
+    defaults:
+      _controller: WANGARDENFactureBundle:Facture:index

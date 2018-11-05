@@ -1,0 +1,12 @@
+{% extends "WANGARDENFactureBundle::layout.html.twig" %}
+
+{% block title %}
+  Wangarden -
+  {{ parent() }}
+{% endblock %}
+
+{% block plateforme_body %}
+
+  {{ include("WANGARDENFactureBundle:Facture/Produit:form.html.twig") }}
+
+{% endblock %}

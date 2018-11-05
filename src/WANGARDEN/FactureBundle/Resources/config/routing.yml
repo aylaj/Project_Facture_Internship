@@ -1,0 +1,17 @@
+wangarden_facture_homepage:
+    path:     /accueil
+    defaults:
+      _controller: WANGARDENFactureBundle:Fact:index
+
+
+wangarden_facture_client:
+    prefix:     /clients
+    resource:     "@WANGARDENFactureBundle/Resources/config/routing/client.yml"
+
+wangarden_facture_produit:
+    prefix:     /produit
+    resource:     "@WANGARDENFactureBundle/Resources/config/routing/produit.yml"
+
+wangarden_facture_facture:
+    prefix:     /factures
+    resource:     "@WANGARDENFactureBundle/Resources/config/routing/facture.yml"
