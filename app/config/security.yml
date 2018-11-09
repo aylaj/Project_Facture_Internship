@@ -3,16 +3,15 @@
 security:
 
     encoders:
-            WANGARDEN\UserBundle\Entity\User: sha512
-    role_hierarchy:
-            # Un admin hérite des droits d'auteur et de modérateur
-            ROLE_ADMIN:       [ROLE_AUTEUR, ROLE_MODERATEUR]
-            # On garde ce rôle superadmin, il nous resservira par la suite
-            ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+            WANGARDEN\UserBundle\Entity\User: plaintext
+            Symfony\Component\Security\Core\User\User: plaintext
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
-        main:
-          id: fos_user.user_provider.username
+        in_memory:
+            memory:
+                users:
+                     amine:
+                         password: aminee
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -21,17 +20,17 @@ security:
             security: false
         # On crée un pare-feu uniquement pour le formulaire
 
-        main:
-              pattern:      ^/
+        main: # nom du parfeu ou firewalls #
+              pattern:      ^/ # pour cacher les url commencent par /#
               anonymous:    true
-              provider:     main
+              provider:     in_memory
               form_login:
                 login_path: fos_user_security_login
                 check_path: fos_user_security_check
               logout:
-                path:       fos_user_security_logout
-                target:     logout
+                path:       fos_user_security_logout #nom de la route de le déconnexions#
+                target:     logout #nom de la route après déconnexion#
               remember_me:
                 secret:     %secret% # %secret% est un paramètre de parameter
     access_control:
-        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/admin, roles: ROLE_ADMIN } # toute les pages qui commencent par admin/ sont accessible via le ROLE_ADMIN#
