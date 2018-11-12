@@ -18,8 +18,9 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
 
             new WANGARDEN\FactureBundle\WANGARDENFactureBundle(),
-            new WANGARDEN\UserBundle\UserBundle(),
+            new WANGARDEN\UserBundle\WANGARDENUserBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+          //  new WANGARDEN\CoreBundle\WANGARDENCoreBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

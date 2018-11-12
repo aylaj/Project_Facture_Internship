@@ -16,6 +16,7 @@
       <link rel="stylesheet" href="{{asset('Custom/css/style.css')}}">
     {% endblock %}
 
+
   </head>
 
   <body>
@@ -24,7 +25,12 @@
       <div id="header" class="well">
         <h1>{{'facture.global.nom_site'|trans}}</h1>
 
-        <p></p>
+        <p> {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+          Connecté en tant que {{ app.user.username }}
+          <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
+        {% else %}
+          <a href="{{ path('fos_user_security_login') }}">Connexion</a>
+        {% endif %} </p>
       </div>
       <div class="row">
         <div id="menu" class="col-md-2">
@@ -69,6 +75,7 @@
           {% block body %}{% endblock %}
         </div>
       </div>
+
 
       <hr>
 

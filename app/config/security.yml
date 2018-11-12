@@ -3,10 +3,16 @@
 security:
 
     encoders:
-            WANGARDEN\UserBundle\Entity\User: plaintext
+            WANGARDEN\UserBundle\Entity\User: sha512
             Symfony\Component\Security\Core\User\User: plaintext
+
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
+        facture_auth:
+          id: fos_user.user_provider.username
         in_memory:
             memory:
                 users:
@@ -23,13 +29,13 @@ security:
         main: # nom du parfeu ou firewalls #
               pattern:      ^/ # pour cacher les url commencent par /#
               anonymous:    true
-              provider:     in_memory
+              provider:     facture_auth
               form_login:
                 login_path: fos_user_security_login
                 check_path: fos_user_security_check
               logout:
                 path:       fos_user_security_logout #nom de la route de le déconnexions#
-                target:     logout #nom de la route après déconnexion#
+                target:     fos_user_security_login #nom de la route après déconnexion#
               remember_me:
                 secret:     %secret% # %secret% est un paramètre de parameter
     access_control:

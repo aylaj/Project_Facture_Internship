@@ -12,7 +12,7 @@ parameters:
 
 framework:
     #esi: ~
-    #translator: { fallbacks: ['%locale%'] }
+    translator: { fallbacks: ['%locale%'] }
     secret: '%secret%'
     router:
         resource: '%kernel.project_dir%/app/config/routing.yml'
@@ -82,4 +82,4 @@ fos_user:
             sender_name: "Test App"
     registration:
             form:
-                type: AppBundle\Form\RegistrationType
+                type: WANGARDEN\UserBundle\Form\RegistrationType

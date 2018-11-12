@@ -17,7 +17,7 @@ class FactController extends Controller
 
 public function indexAction() {
 
-  var_dump($this->getUser());
+  //var_dump($this->getUser());
 
     return $this->render('WANGARDENFactureBundle:Facture:index.html.twig');
   }

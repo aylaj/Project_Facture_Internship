@@ -2,3 +2,8 @@ services:
 #    user.example:
 #        class: WANGARDEN\UserBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
+
+     app.form.registration:
+        class: WANGARDEN\UserBundle\Form\RegistrationType
+        tags:
+            - { name: form.type, alias: app_user_registration }
