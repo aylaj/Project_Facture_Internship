@@ -19,12 +19,6 @@ class User extends BaseUser
      */
     protected $id;
 
-    public function __construct()
-    {
-        parent::__construct();
-        // your own logic
-    }
-
     /**
      * @ORM\Column(type="string", length=255)
      *
@@ -60,12 +54,15 @@ class User extends BaseUser
       return $this->lastName;
     }
     public function setLastName($lastName){
-
       return $this->lastName=$lastName;
     }
-
     public function setFirstName($firstName){
-
       return $this->firstName=$firstName;
     }
+
+    
+
+
+
+
 }

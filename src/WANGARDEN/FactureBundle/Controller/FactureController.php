@@ -17,12 +17,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
+
 class FactureController extends Controller
 {
     /**
      * @Security("has_role('ROLE_ADMIN')")
      */
-
 
     public function viewAction(Request $request, $id)
     {
@@ -87,7 +87,7 @@ class FactureController extends Controller
     public function SelectProduitClientAction(Request $request)
     {
         // On vérifie que l'utilisateur dispose bien du rôle ROLE_AUTEUR
-        if ($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             // Sinon on déclenche une exception « Accès interdit »
             throw new AccessDeniedException('Accès limité aux admins.');
         }

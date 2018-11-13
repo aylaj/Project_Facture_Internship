@@ -32,11 +32,14 @@ security:
               provider:     facture_auth
               form_login:
                 login_path: fos_user_security_login
-                check_path: fos_user_security_check
+                check_path: /login_check
+                default_target_path: /accueil
               logout:
                 path:       fos_user_security_logout #nom de la route de le déconnexions#
                 target:     fos_user_security_login #nom de la route après déconnexion#
               remember_me:
                 secret:     %secret% # %secret% est un paramètre de parameter
     access_control:
-        - { path: ^/admin, roles: ROLE_ADMIN } # toute les pages qui commencent par admin/ sont accessible via le ROLE_ADMIN#
+        - { path: ^/clients, roles: ROLE_ADMIN }
+        - { path: ^/produit, role: IS_AUTHENTICATED_ANONYMOUSLY  }
+        - { path: ^/factures, role: IS_AUTHENTICATED_ANONYMOUSLY  } # toute les pages qui commencent par admin/ sont accessible via le ROLE_ADMIN#

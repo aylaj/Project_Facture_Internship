@@ -7,3 +7,9 @@ services:
         class: WANGARDEN\UserBundle\Form\RegistrationType
         tags:
             - { name: form.type, alias: app_user_registration }
+
+     my.handler.session_idle:
+        class: WANGARDEN\UserBundle\Gestion\SessionIdleHandler
+        arguments: ["@session", "@security.token_storage", "@router", %session_max_idle_time%]
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
